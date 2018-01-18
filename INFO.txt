@@ -1,0 +1,2 @@
+Launch game with debug and logs
+    - witcher3.exe -net -debugscripts

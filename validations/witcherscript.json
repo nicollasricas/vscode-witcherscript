@@ -1,0 +1,62 @@
+{
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "object",
+    "title": "Witcher 3 Mod Config Schema",
+    "properties": {
+        "mod.name": {
+            "$id": "/properties/mod.name",
+            "type": "string",
+            "title": "The mod name.",
+            "default": "",
+            "examples": [
+                "modWitcherImproved"
+            ]
+        },
+        "mod.isDLC": {
+            "$id": "/properties/mod.isDLC",
+            "type": "boolean",
+            "title": "Specifies if the mod is a DLC.",
+            "default": false,
+            "examples": [
+                false
+            ]
+        },
+        "witcher3.gamePath": {
+            "$id": "/properties/witcher3.gamePath",
+            "type": "string",
+            "title": "The Witcher 3 path.",
+            "default": "",
+            "examples": [
+                "D:\\Games\\The Witcher 3"
+            ]
+        },
+        "witcher3.modKitPath": {
+            "$id": "/properties/witcher3.modKitPath",
+            "type": "string",
+            "title": "The Witcher 3 Mod Kit path.",
+            "default": "",
+            "examples": [
+                "D:\\Witchering\\ModKit"
+            ]
+        },
+        "build.xmlOnly": {
+            "$id": "/properties/build.xmlOnly",
+            "type": "boolean",
+            "title": "Specifies if only XML should be used when cooking the mod.",
+            "default": false,
+            "examples": [
+                false
+            ]
+        },
+        "build.skipErrors": {
+            "$id": "/properties/build.skipErrors",
+            "type": "boolean",
+            "title": "Specifies if errors are be displayed.",
+            "default": false,
+            "examples": [
+                false
+            ]
+        }
+    }
+}

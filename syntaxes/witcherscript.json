@@ -1,0 +1,155 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Witcher Script",
+	"foldingStartMarker": "\\{\\s*$",
+	"foldingStopMarker": "^\\s*\\}",
+	"patterns": [
+		{
+			"begin": "\/\\*",
+			"end": "\\*\/",
+			"name": "comment.block.ws"
+		},
+		{
+			"match": "\/\/.*",
+			"name": "comment.double-slash.ws"
+		},
+		{
+			"name": "string.quoted.double.ws",
+			"begin": "\"",
+			"end": "\""
+		},
+		{
+			"begin": "'",
+			"end": "'",
+			"name": "string.quoted.single.ws"
+		},
+		{
+			"match": ":\\s*([A-Z]\\w+)",
+			"captures": {
+				"1": {
+					"name": "support.class.ws"
+				}
+			}
+		},
+		{
+			"match": "(\\(|,)\\s*(\\w+)\\s*:",
+			"captures": {
+				"2": {
+					"name": "support.variable"
+				}
+			}
+		},
+		{
+			"match": "(extends|class)\\s*(\\w*)",
+			"captures": {
+				"1": {
+					"name": "keyword.other.ws"
+				},
+				"2": {
+					"name": "support.class.ws"
+				}
+			}
+		},
+		{
+			"match": "(array)\\s*(<)\\s*(\\w+)\\s*(>)",
+			"captures": {
+				"1": {
+					"name": "storage.type.ws"
+				},
+				"2": {
+					"name": "keyword.operator.new"
+				},
+				"3": {
+					"name": "support.type.ws"
+				},
+				"4": {
+					"name": "keyword.operator.new"
+				}
+			}
+		},
+		{
+			"match": "\\(\\s*(\\s*[A-Z]\\w+\\s*)\\s*\\)\\s*\\(",
+			"captures": {
+				"1": {
+					"name": "support.class.ws"
+				}
+			}
+		},
+		{
+			"match": "\\(\\s*\\(\\s*([A-Z]\\w+)\\s*\\)",
+			"captures": {
+				"1": {
+					"name": "support.class.ws"
+				}
+			}
+		},
+		{
+			"match": "(new)\\s*(\\w+)\\s*(in)\\s*(this)",
+			"captures": {
+				"1": {
+					"name": "variable.language.ws"
+				},
+				"2": {
+					"name": "support.class.ws"
+				},
+				"3": {
+					"name": "variable.language.ws"
+				},
+				"4": {
+					"name": "variable.language.ws"
+				}
+			}
+		},
+		{
+			"match": "(function|event)\\s*(\\\/\\*.*\\*\\\/\\s*)?\\s*(\\w+)\\s*",
+			"captures": {
+				"1": {
+					"name": "support.type"
+				},
+				"2": {
+					"name": "comment.block.ws"
+				},
+				"3": {
+					"name": "support.function"
+				}
+			}
+		},
+		{
+			"name": "keyword.control.ws",
+			"match": "\\b(break|case|continue|default|else|for|if|return|switch|while)\\b"
+		},
+		{
+			"name": "keyword.other.ws",
+			"match": "\\b(autobind|editable|entry|exec|hint|import|latent|optional|out|quest|saved|statemachine|timer)\\b"
+		},
+		{
+			"name": "keyword.operator.new.ws",
+			"match": "\\b(=|!|<|>|&|\\+|-|\\^|\\*|\\\/|\\|)\\b"
+		},
+		{
+			"name": "constant.numeric.ws",
+			"match": "\\b(\\d+|\\d+.?(f)?)\\b"
+		},
+		{
+			"name": "constant.language.ws",
+			"match": "\\b(false|NULL|true)\\b"
+		},
+		{
+			"name": "storage.type.ws",
+			"match": "\\b(var|class|string|int|integer|bool|float|enum|name|struct|state|array)\\b"
+		},
+		{
+			"name": "storage.modifier.ws",
+			"match": "\\b(abstract|const|final|private|protected|public)\\b"
+		},
+		{
+			"name": "support.class.ws",
+			"match": "\\b(theGame|theInput|thePlayer|theSound)\\b"
+		},
+		{
+			"match": "\\b(this|parent|super)\\b",
+			"name": "variable.language.ws"
+		}
+	],
+	"scopeName": "source.ws"
+}
