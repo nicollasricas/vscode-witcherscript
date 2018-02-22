@@ -24,16 +24,115 @@
 			"name": "string.quoted.single.ws"
 		},
 		{
-			"match": ":\\s*([A-Z]\\w+)",
-			"captures": {
-				"1": {
-					"name": "support.class.ws"
-				}
-			}
+			"name": "keyword.control.ws",
+			"match": "\\b(break|case|continue|else|for|if|return|switch|while)\\b"
 		},
 		{
-			"match": "(\\(|,)\\s*(\\w+)\\s*:",
+			"name": "keyword.other.ws",
+			"match": "\\b(out|inlined|autobind|editable|entry|exec|hint|import|latent|optional|out|quest|saved|statemachine|timer)\\b"
+		},
+		{
+			"name": "keyword.operator.new.ws",
+			"match": "\\b(=|!|<|>|&|\\+|-|\\^|\\*|\\\/|\\|)\\b"
+		},
+		{
+			"name": "constant.numeric.ws",
+			"match": "\\b(\\d+|\\d+.?(f)?)\\b"
+		},
+		{
+			"name": "constant.language.ws",
+			"match": "\\b(false|NULL|true)\\b"
+		},
+		{
+			"name": "storage.type.ws",
+			"match": "\\b(enum|struct|state|array)\\b"
+		},
+		{
+			"name": "storage.modifier.ws",
+			"match": "\\b(abstract|const|final|private|protected|public)\\b"
+		},
+		{
+			"name": "support.class.ws",
+			"match": "\\b(theGame|theInput|thePlayer|theSound)\\b"
+		},
+		{
+			"match": "\\b(this|parent|super)\\b",
+			"name": "variable.language.ws"
+		},
+		{
+			"begin": "(function|event)\\s*(\\\/\\*.*\\*\\\/)?\\s*(\\w+)\\s*\\(",
+			"beginCaptures": {
+				"1": {
+					"name": "support.type.ws"
+				},
+				"2": {
+					"name": "comment.block.ws"
+				},
+				"3": {
+					"name": "support.function.ws"
+				}
+			},
+			"end": "\\)(\\s*:\\s*(array\\s*<\\s*\\w+\\s*>|\\w*))?",
+			"endCaptures": {
+				"2": {
+					"patterns": [
+						{
+							"include": "#ws-var-types"
+						}
+					]
+				}
+			},
+			"patterns": [
+				{
+					"match": "\\s*(out|optional)?\\s*(\\w+)\\s*:\\s*(array\\s*<\\s*\\w+\\s*>|\\w*|),?",
+					"captures": {
+						"1": {
+							"name": "keyword.other.ws"
+						},
+						"2": {
+							"name": "support.variable.ws"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#ws-var-types"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"begin": "(var)\\s*",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.ws"
+				}
+			},
+			"end": ":\\s*(array\\s*<\\s*\\w+\\s*>|\\w*)\\s*;",
+			"endCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#ws-var-types"
+						}
+					]
+				}
+			},
+			"patterns": [
+				{
+					"match": "(\\w+)\\s*,?",
+					"name": "support.variable.ws"
+				}
+			]
+		},
+		{
+			"match": "(default)\\s*(\\w+)",
 			"captures": {
+				"1": {
+					"name": "keyword.control.ws"
+				},
 				"2": {
 					"name": "support.variable"
 				}
@@ -47,23 +146,6 @@
 				},
 				"2": {
 					"name": "support.class.ws"
-				}
-			}
-		},
-		{
-			"match": "(array)\\s*(<)\\s*(\\w+)\\s*(>)",
-			"captures": {
-				"1": {
-					"name": "storage.type.ws"
-				},
-				"2": {
-					"name": "keyword.operator.new"
-				},
-				"3": {
-					"name": "support.type.ws"
-				},
-				"4": {
-					"name": "keyword.operator.new"
 				}
 			}
 		},
@@ -101,55 +183,54 @@
 			}
 		},
 		{
-			"match": "(function|event)\\s*(\\\/\\*.*\\*\\\/\\s*)?\\s*(\\w+)\\s*",
-			"captures": {
-				"1": {
-					"name": "support.type"
-				},
-				"2": {
-					"name": "comment.block.ws"
-				},
-				"3": {
-					"name": "support.function"
-				}
-			}
-		},
-		{
-			"name": "keyword.control.ws",
-			"match": "\\b(break|case|continue|default|else|for|if|return|switch|while)\\b"
-		},
-		{
-			"name": "keyword.other.ws",
-			"match": "\\b(autobind|editable|entry|exec|hint|import|latent|optional|out|quest|saved|statemachine|timer)\\b"
-		},
-		{
-			"name": "keyword.operator.new.ws",
-			"match": "\\b(=|!|<|>|&|\\+|-|\\^|\\*|\\\/|\\|)\\b"
-		},
-		{
-			"name": "constant.numeric.ws",
-			"match": "\\b(\\d+|\\d+.?(f)?)\\b"
-		},
-		{
-			"name": "constant.language.ws",
-			"match": "\\b(false|NULL|true)\\b"
-		},
-		{
-			"name": "storage.type.ws",
-			"match": "\\b(var|class|string|int|integer|bool|float|enum|name|struct|state|array)\\b"
-		},
-		{
-			"name": "storage.modifier.ws",
-			"match": "\\b(abstract|const|final|private|protected|public)\\b"
-		},
-		{
-			"name": "support.class.ws",
-			"match": "\\b(theGame|theInput|thePlayer|theSound)\\b"
-		},
-		{
-			"match": "\\b(this|parent|super)\\b",
-			"name": "variable.language.ws"
+			"include": "#ws-data-types"
 		}
 	],
-	"scopeName": "source.ws"
+	"scopeName": "source.ws",
+	"repository": {
+		"ws-var-types": {
+			"patterns": [
+				{
+					"include": "#ws-object-types"
+				},
+				{
+					"match": "(array)\\s*<\\s*(\\w+)\\s*>",
+					"captures": {
+						"1": {
+							"name": "storage.type.ws"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#ws-object-types"
+								},
+								{
+									"include": "#ws-data-types"
+								}
+							]
+						}
+					}
+				},
+				{
+					"include": "#ws-data-types"
+				}
+			]
+		},
+		"ws-object-types": {
+			"patterns": [
+				{
+					"match": "[A-Z]\\w+",
+					"name": "support.class.ws"
+				}
+			]
+		},
+		"ws-data-types": {
+			"patterns": [
+				{
+					"name": "storage.type.ws",
+					"match": "\\b(string|int|integer|bool|float|name|range)\\b"
+				}
+			]
+		}
+	}
 }

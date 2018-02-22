@@ -1,4 +1,8 @@
 {
+    "activationEvents": [
+        "onLanguage:witcherscript",
+        "workspaceContains:**/witcher.package.json"
+    ],
     "author": {
         "name": "Nicollas Ricas"
     },
@@ -6,47 +10,44 @@
         "url": "https://github.com/nicollasricas/vscode-witcherscript/issues"
     },
     "categories": [
-        "Languages"
+        "Languages",
+        "Extension Packs",
+        "Snippets"
+    ],
+    "keywords": [
+        "witcher"
+    ],
+    "extensionDependencies": [
+        "nicollasricas.vscode-witcherscript-addon"
     ],
     "contributes": {
         "commands": [
             {
-                "category": "Witcher 3",
-                "command": "extension.publish",
-                "title": "Publish"
+                "category": "Witcher",
+                "command": "extension.witcherscript.cook",
+                "title": "Cook Mod"
             },
             {
-                "category": "Witcher 3",
-                "command": "extension.build",
-                "title": "Build"
-            },
-            {
-                "category": "Witcher 3",
-                "command": "extension.uncook",
-                "title": "Uncook"
-            },
-            {
-                "category": "Witcher 3",
-                "command": "extension.cook",
-                "title": "Cook"
-            },
-            {
-                "category": "Witcher 3",
-                "command": "extension.launchGame",
-                "title": "Launch Game"
+                "category": "Witcher",
+                "command": "extension.witcherscript.launch",
+                "title": "Launch Game",
+                "icon": {
+                    "light": "./images/icon.png",
+                    "dark": "./images/icon.png"
+                }
             }
         ],
         "configuration": [
             {
                 "properties": {
-                    "witcher3.gamePath": {
+                    "witcherscript.gamePath": {
                         "default": "",
-                        "description": "Specifies the folder path containing the Witcher 3 files.",
+                        "description": "The path containing the Witcher 3 files.",
                         "type": "string"
                     },
-                    "witcher3.modKitPath": {
+                    "witcherscript.modKitPath": {
                         "default": "",
-                        "description": "Specifies the folder path containing the Witcher 3 Mod Kit files.",
+                        "description": "The path containing the Witcher 3 Mod Kit files.",
                         "type": "string"
                     }
                 },
@@ -62,7 +63,7 @@
         ],
         "jsonValidation": [
             {
-                "fileMatch": "package.json",
+                "fileMatch": "witcher.package.json",
                 "url": "./validations/witcherscript.json"
             }
         ],
@@ -79,6 +80,15 @@
                 "id": "witcherscript"
             }
         ],
+        "menus": {
+            "editor/title": [
+                {
+                    "when": "resourceLangId == witcherscript",
+                    "command": "extension.witcherscript.launch",
+                    "group": "navigation"
+                }
+            ]
+        },
         "snippets": [
             {
                 "language": "witcherscript",
@@ -86,14 +96,13 @@
             }
         ]
     },
-    "dependencies": {
-        "vscode": "^1.1.10"
-    },
     "description": "Witcher Script for Visual Studio Code",
     "devDependencies": {
-        "tslint": "^5.9.1",
-        "typescript": "^2.6.2",
-        "vscode": "^1.1.10"
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "@types/node": "^7.0.52",
+        "@types/mocha": "^2.2.46",
+        "tslint": "^5.9.1"
     },
     "displayName": "vscode-witcherscript",
     "engines": {
@@ -101,6 +110,7 @@
     },
     "homepage": "https://github.com/nicollasricas/vscode-witcherscript/",
     "icon": "images/icon.png",
+    "main": "./out/extension",
     "name": "vscode-witcherscript",
     "publisher": "nicollasricas",
     "repository": {
@@ -108,7 +118,11 @@
         "url": "https://github.com/nicollasricas/vscode-witcherscript.git"
     },
     "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install"
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
-    "version": "1.0.1"
+    "version": "1.0.3"
 }
