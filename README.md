@@ -19,5 +19,3 @@ This extension adds support for The Witcher 3 script language to VS Code.
 ## License
 
 Witcher Script is licensed under [MIT](https://opensource.org/licenses/MIT).
-
------------------------------------------------------------------------------------------------------------
