@@ -1,7 +1,7 @@
 {
     "activationEvents": [
         "onLanguage:witcherscript",
-        "workspaceContains:**/witcher.package.json"
+        "workspaceContains:./witcher.package.json"
     ],
     "author": {
         "name": "Nicollas Ricas"
@@ -48,6 +48,11 @@
                     "witcherscript.modKitPath": {
                         "default": "",
                         "description": "The path containing the Witcher 3 Mod Kit files.",
+                        "type": "string"
+                    },
+                    "witcherscript.modMergerPath": {
+                        "default": "",
+                        "description": "The path containing the Mod Merger files.",
                         "type": "string"
                     }
                 },
@@ -124,5 +129,5 @@
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
-    "version": "1.0.3"
+    "version": "1.0.5"
 }

@@ -2,6 +2,8 @@
 
 This extension adds support for The Witcher 3 script language to VS Code.
 
+[Wiki](https://github.com/nicollasricas/vscode-witcherscript/wiki).
+
 ## Features
 - Code Highlight
 - Snippets
@@ -12,9 +14,11 @@ This extension adds support for The Witcher 3 script language to VS Code.
 
 ## Release Notes [Full Changelog](CHANGELOG.md)
 
-### 1.0.3
-- Added support for create and cook mods. [Wiki](https://github.com/nicollasricas/vscode-witcherscript/wiki)
-- Added support for launch the game. [Wiki](https://github.com/nicollasricas/vscode-witcherscript/wiki)
+### 1.0.5
+- Fixed deploy issue.
+
+### 1.0.4
+- Improved cooking mods command.
 
 ## License
 

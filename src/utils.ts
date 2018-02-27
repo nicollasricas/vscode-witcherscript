@@ -38,6 +38,16 @@ export function getModKitPath(): string {
     return modKitPath;
 }
 
+export function getModMergerPath(): string {
+    let modMergerPath = <string>vscode.workspace.getConfiguration().get('witcherscript.modMergerPath');
+
+    if (!modMergerPath) {
+        return "";
+    }
+
+    return modMergerPath;
+}
+
 export function isWitcherPackage(): boolean {
     try {
         fs.accessSync(path.join(vscode.workspace.workspaceFolders[0].uri.fsPath, 'witcher.package.json'));
