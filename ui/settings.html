@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <base href="">
+
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="{{root}}/ui/styles.css" type="text/css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <header>
+                <a href="https://marketplace.visualstudio.com/items?itemName=nicollasricas.vscode-witcherscript" title="Learn more about Witcher Script for VS Code">
+                    <div class="header__logo">
+                        <img src="{{root}}/images/icon.png" alt="Witcher Script Logo" />
+                    </div>
+                </a>
+
+                <h1>Witcher Script for VS Code</h1>
+
+                <p>
+                    <strong>Witcher Script for VS Code</strong> is an open-source extension that adds support for
+                    <strong>The Witcher 3</strong> script language.
+                </p>
+
+                <ul>
+                    <li>
+                        <a href="command:witcherscript.showWelcomePage">FEATURES</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/nicollasricas/vscode-witcherscript/blob/master/CHANGELOG.md">CHANGELOG</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/nicollasricas/vscode-witcherscript/wiki/Getting-started">GETTING STARTED</a>
+                    </li>
+                </ul>
+            </header>
+
+            <main>
+                <form>
+                    <div class="input-control">
+                        <label>Game Path</label>
+                        <input id="gamePath" type="text" placeholder="Eg.: D:\Steam\steamapps\common\The Witcher 3" value="{{model.gamePath}}" />
+                        <a href="#" data-change-setting="gamePath">Browse</a>
+                    </div>
+
+                    <div class="input-control">
+                        <label>Mod Kit Path</label>
+                        <input id="modKitPath" type="text" placeholder="Eg.: D:\Witchering\ModKit" value="{{model.modKitPath}}" />
+                        <a href="#" data-change-setting="modKitPath">Browse</a>
+                    </div>
+
+                    <div class="input-control">
+                        <label>Mod Merger Path</label>
+                        <input id="modMergerPath" type="text" placeholder="Eg.: D:\Witchering\ScriptMerger" value="{{model.modMergerPath}}" />
+                        <a href="#" data-change-setting="modMergerPath">Browse</a>
+                    </div>
+
+                    <div class="input-control">
+                        <label>Uncooked Base Path</label>
+                        <input id="uncookedBasePath" type="text" placeholder="Eg.: D:\Witchering\UncookedBase" value="{{model.uncookedBasePath}}"
+                        />
+                        <a href="#" data-change-setting="uncookedBasePath">Browse</a>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+
+    <script src="{{root}}/ui/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            const vscode = acquireVsCodeApi();
+
+            window.addEventListener('message', event => {
+                const message = event.data;
+
+                if (message.command == 'update-setting-ui') {
+                    $('#' + message.arguments[0]).val(message.arguments[1]);
+                }
+            });
+
+            $('[data-change-setting]').click(function (e) {
+                vscode.postMessage({
+                    command: 'change-setting',
+                    arguments: [$(this).data('change-setting')]
+                });
+            });
+        });
+    </script>
+</body>

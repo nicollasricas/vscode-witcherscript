@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <base href="">
+
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="{{root}}/ui/styles.css" type="text/css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <header>
+                <a href="https://marketplace.visualstudio.com/items?itemName=nicollasricas.vscode-witcherscript" title="Learn more about Witcher Script for VS Code">
+                    <div class="header__logo">
+                        <img src="{{root}}/images/icon.png" alt="Witcher Script Logo" />
+                    </div>
+                </a>
+
+                <h1>Witcher Script for VS Code</h1>
+
+                <p>
+                    <strong>Witcher Script for VS Code</strong> is an open-source extension that adds support for
+                    <strong>The Witcher 3</strong> script language.
+                </p>
+
+                <ul>
+                    <li>
+                        <a href="command:witcherscript.showSettingsPage">SETTINGS</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/nicollasricas/vscode-witcherscript/blob/master/CHANGELOG.md">CHANGELOG</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/nicollasricas/vscode-witcherscript/wiki/Getting-started">GETTING STARTED</a>
+                    </li>
+                </ul>
+            </header>
+
+            <main>
+                <div id="features" class="features">
+                    <ul id="accordion">
+                        <li>
+                            <a class="feature active" href="#tabs-1">
+                                <div class="tag">
+                                    <div class="icon">
+                                        <div class="block">
+                                            <div class="circle"></div>
+                                            <div class="stem"></div>
+                                            <div class="kick"></div>
+                                        </div>
+                                    </div>
+                                    <span class="title">Code Highlight</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tabs-2" class="feature">
+                                <div class="tag">
+                                    <div class="icon">
+                                        <div class="block">
+                                            <div class="circle"></div>
+                                            <div class="stem"></div>
+                                            <div class="kick"></div>
+                                        </div>
+                                    </div>
+                                    <span class="title">Cook and Publish</span>
+                                </div>
+                            </a>
+                            <div class="addon">
+                                <span>
+                                    Create, cook and publish your mods. This feature supports cooking mods with scripts or/either content files.
+                                </span>
+                                <a class="para-a" href="https://github.com/nicollasricas/vscode-witcherscript/wiki/Cooking-mods">Learn More</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#tabs-3" class="feature">
+                                <div class="tag">
+                                    <div class="icon">
+                                        <div class="block">
+                                            <div class="circle"></div>
+                                            <div class="stem"></div>
+                                            <div class="kick"></div>
+                                        </div>
+                                    </div>
+                                    <span class="title">Launch Game</span>
+                                </div>
+                            </a>
+                            <div class="addon">
+                                <span>
+                                    Launch the game directly from the VS Code, without having to switch to anything else, also every time you cook a mod you
+                                    will be prompted to launch the game.
+                                </span>
+                                <a class="para-a" href="#">Learn More</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#tabs-4" class="feature">
+                                <div class="tag">
+                                    <div class="icon">
+                                        <div class="block">
+                                            <div class="circle"></div>
+                                            <div class="stem"></div>
+                                            <div class="kick"></div>
+                                        </div>
+                                    </div>
+                                    <span class="title">Import scripts</span>
+                                </div>
+                            </a>
+
+                            <div class="addon">
+                                <span>
+                                    Import scripts files to your mod directory. Search for any script and import without the need to copy or create directories
+                                    by yourself, the extension will do everything.
+                                </span>
+                                <a class="para-a" href="#">Learn More</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#tabs-5" class="feature">
+                                <div class="tag">
+                                    <div class="icon">
+                                        <div class="block">
+                                            <div class="circle"></div>
+                                            <div class="stem"></div>
+                                            <div class="kick"></div>
+                                        </div>
+                                    </div>
+                                    <span class="title">Import contents</span>
+                                </div>
+                            </a>
+
+                            <div class="addon">
+                                <span>
+                                    Import contents files to your mod directory. Search for any contents and import without the need to copy or create directories
+                                    by yourself, the extension will do everything.
+                                </span>
+                                <a class="para-a" href="#">Learn More</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#tabs-6" class="feature">
+                                <div class="tag">
+                                    <div class="icon">
+                                        <div class="block">
+                                            <div class="circle"></div>
+                                            <div class="stem"></div>
+                                            <div class="kick"></div>
+                                        </div>
+                                    </div>
+                                    <span class="title">Snippets</span>
+                                </div>
+                            </a>
+
+                            <div class="addon">
+                                <span>
+                                    Make you more productive working with Witcher Script.
+                                </span>
+                                <a class="para-a" href="#">Learn More</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="preview">
+                        <div class="feature" id="tabs-1">
+                            <img src="{{root}}/features/highlight.png">
+                        </div>
+                        <div class="feature" id="tabs-2">
+                            <img src="{{root}}/features/cookmod.gif">
+                        </div>
+                        <div class="feature" id="tabs-3">
+                            <img src="{{root}}/features/launchgame.gif">
+                        </div>
+                        <div class="feature" id="tabs-4">
+                            <img src="{{root}}/features/importscript.gif">
+                        </div>
+                        <div class="feature" id="tabs-5">
+                            <img src="{{root}}/features/importcontent.gif">
+                        </div>
+                        <div class="feature" id="tabs-6">
+                            <img src="{{root}}/features/snippets.gif">
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="{{root}}/ui/jquery.min.js"></script>
+    <script src="{{root}}/ui/jquery-ui.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#features").tabs({
+                show: { effect: "blind", direction: "right", duration: 300 }
+            });
+
+            $("#accordion").accordion();
+
+            var btn = $('#accordion li a.feature');
+            var wrapper = $('#accordion li');
+
+            $(btn).on('click', function () {
+                $(btn).removeClass('active');
+                $(btn).parent().find('.addon').removeClass('fadein');
+
+                $(this).addClass('active');
+                $(this).parent().find('.addon').addClass('fadein');
+            });
+        });
+    </script>
+</body>

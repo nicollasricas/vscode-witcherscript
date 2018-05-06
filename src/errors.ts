@@ -1,39 +1,39 @@
 import * as vscode from 'vscode';
 
-export const GamePathNotSetted = "E_GAME_PATH_NOT_SETTED";
-export const ModKitPathNotSetted = "E_MOD_KIT_PATH_NOT_SETTED";
-export const GameExeNotFound = "E_GAME_EXE_NOT_FOUND";
-export const UnableToLaunch = "E_UNABLE_TO_LAUNCH";
-export const CompanionAppNotInstalled = "E_COMPANION_APP_NOT_INSTALLED";
-export const ModNotCreated = "E_MOD_NOT_CREATED";
-export const PathNotSelected = "E_PATH_NOT_SELECTED";
-export const Unexpected = "E_UNEXPECTED";
+export enum Errors {
+    ModKitPathNotSetted = "E_MOD_KIT_PATH_NOT_SETTED",
+    GameExeNotFound = "E_GAME_EXE_NOT_FOUND",
+    GamePathNotSetted = "E_GAME_PATH_NOT_SETTED",
+    UnableToLaunch = "E_UNABLE_TO_LAUNCH",
+    ModNotCreated = "E_MOD_NOT_CREATED",
+    PathNotSelected = "E_PATH_NOT_SELECTED",
+    Unexpected = "E_UNEXPECTED",
+    UncookedPathNotSetted = "E_UNCOOKED_PATH_NOT_SETTED"
+};
 
-export function show(errorCode: string) {
-    let errorMessage = errorCodeToString(errorCode);
-
-    if (errorMessage) {
-        vscode.window.showErrorMessage(errorMessage);
+export function displayError(error: Errors) {
+    if (error) {
+        vscode.window.showErrorMessage(errorToReadableString(error));
     }
 }
 
-function errorCodeToString(errorCode: string): string {
+function errorToReadableString(errorCode: string): string {
     switch (errorCode) {
-        case PathNotSelected:
+        case Errors.PathNotSelected:
             return 'Path not selected';
-        case UnableToLaunch:
+        case Errors.UnableToLaunch:
             return 'Unable to start the game!';
-        case GameExeNotFound:
+        case Errors.GameExeNotFound:
             return 'The game executable was not found!';
-        case GamePathNotSetted:
-            return 'Configure the "witcherscript.gamePath" in File > Preferences > Settings.';
-        case ModKitPathNotSetted:
-            return 'Configure the "witcherscript.modKitPath" in File > Preferences > Settings.';
-        case CompanionAppNotInstalled:
-            return 'Download the Witcher Script companion app (https://https://github.com/nicollasricas/vscode-witcherscript-companion) before use this feature.';
-        case ModNotCreated:
-            return 'To use this feature create a mod using the "Witcher - Create Mod" command.';
-        case Unexpected:
+        case Errors.GamePathNotSetted:
+            return 'Configure game path.';
+        case Errors.ModKitPathNotSetted:
+            return 'Configure mod kit path.';
+        case Errors.ModNotCreated:
+            return 'To use this feature create a mod using the (Ctrl + Shift + P) - "Witcher - New Mod" command.';
+        case Errors.Unexpected:
             return 'Something went wrong!';
+        case Errors.UncookedPathNotSetted:
+            return 'Configure uncooked base path.';
     }
 }

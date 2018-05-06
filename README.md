@@ -14,6 +14,15 @@ This extension adds support for The Witcher 3 script language to VS Code.
 
 ## Release Notes [Full Changelog](CHANGELOG.md)
 
+### 1.0.7
+- Added new features
+- Bug fixes
+- Added welcome page with main features
+- Added a friendly settings page
+
+### 1.0.6
+- Bug fixes
+
 ### 1.0.5
 - Fixed deploy issue.
 

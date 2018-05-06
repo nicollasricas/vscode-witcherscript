@@ -3,6 +3,20 @@ All notable changes to the Witcher Script extension will be documented in this f
 
 ## [Unreleased]
 
+### 1.0.7 - 06/05/2018
+### Added
+- New features.
+- Bug fixes.
+- Welcome page with main features.
+- Friendly settings page.
+
+### Changed
+- Bug fixes.
+
+## [1.0.6] - 03/04/2018
+### Changed
+- Bug fixes.
+
 ## [1.0.5] - 02/27/2018
 ### Changed
 - Fixed deploy issue.

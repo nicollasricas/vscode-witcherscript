@@ -1,7 +1,7 @@
 {
     "activationEvents": [
         "onLanguage:witcherscript",
-        "workspaceContains:./witcher.package.json"
+        "workspaceContains:witcher.package.json"
     ],
     "author": {
         "name": "Nicollas Ricas"
@@ -14,27 +14,49 @@
         "Extension Packs",
         "Snippets"
     ],
-    "keywords": [
-        "witcher"
-    ],
-    "extensionDependencies": [
-        "nicollasricas.vscode-witcherscript-addon"
-    ],
     "contributes": {
         "commands": [
             {
                 "category": "Witcher",
-                "command": "extension.witcherscript.cook",
+                "command": "witcherscript.showWelcomePage",
+                "title": "Welcome"
+            },
+            {
+                "category": "Witcher",
+                "command": "witcherscript.showSettingsPage",
+                "title": "Open Settings"
+            },
+            {
+                "category": "Witcher",
+                "command": "witcherscript.cook",
+                "icon": {
+                    "dark": "./images/pan.svg",
+                    "light": "./images/pan.svg"
+                },
                 "title": "Cook Mod"
             },
             {
                 "category": "Witcher",
-                "command": "extension.witcherscript.launch",
-                "title": "Launch Game",
+                "command": "witcherscript.launch",
                 "icon": {
-                    "light": "./images/icon.png",
-                    "dark": "./images/icon.png"
-                }
+                    "dark": "./images/icon.png",
+                    "light": "./images/icon.png"
+                },
+                "title": "Launch Game"
+            },
+            {
+                "category": "Witcher",
+                "command": "witcherscript.importScript",
+                "title": "Import Witcher Script File"
+            },
+            {
+                "category": "Witcher",
+                "command": "witcherscript.importContent",
+                "title": "Import Witcher Content File"
+            },
+            {
+                "command": "witcherscript.compareScript",
+                "title": "Compare with Original Witcher Script"
             }
         ],
         "configuration": [
@@ -53,6 +75,11 @@
                     "witcherscript.modMergerPath": {
                         "default": "",
                         "description": "The path containing the Mod Merger files.",
+                        "type": "string"
+                    },
+                    "witcherscript.uncookedBasePath": {
+                        "default": "",
+                        "description": "The path containing uncooked base files.",
                         "type": "string"
                     }
                 },
@@ -86,11 +113,38 @@
             }
         ],
         "menus": {
+            "editor/context": [
+                {
+                    "command": "witcherscript.compareScript",
+                    "group": "witcherscript",
+                    "when": "resourceLangId == witcherscript"
+                }
+            ],
             "editor/title": [
                 {
-                    "when": "resourceLangId == witcherscript",
-                    "command": "extension.witcherscript.launch",
-                    "group": "navigation"
+                    "command": "witcherscript.cook",
+                    "group": "navigation",
+                    "when": "resourceLangId == witcherscript"
+                },
+                {
+                    "command": "witcherscript.launch",
+                    "group": "navigation",
+                    "when": "resourceLangId == witcherscript"
+                }
+            ],
+            "explorer/context": [
+                {
+                    "command": "witcherscript.importScript",
+                    "group": "witcherscript"
+                },
+                {
+                    "command": "witcherscript.importContent",
+                    "group": "witcherscript"
+                },
+                {
+                    "command": "witcherscript.compareScript",
+                    "group": "witcherscript",
+                    "when": "resourceExtname == .ws"
                 }
             ]
         },
@@ -101,20 +155,32 @@
             }
         ]
     },
+    "dependencies": {
+        "tmp": "^0.0.33",
+        "yauzl": "^2.9.1",
+        "mkdirp": "^0.5.1"
+    },
     "description": "Witcher Script for Visual Studio Code",
     "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6",
-        "@types/node": "^7.0.52",
-        "@types/mocha": "^2.2.46",
-        "tslint": "^5.9.1"
+        "gulp": "^3.9.1",
+        "gulp-sass": "^3.1.0",
+        "@types/node": "^9.4.7",
+        "tslint": "^5.9.1",
+        "typescript": "^2.7.2",
+        "vscode": "^1.1.17"
     },
     "displayName": "vscode-witcherscript",
     "engines": {
-        "vscode": "^1.19.0"
+        "vscode": "^1.23.0"
     },
+    "extensionDependencies": [
+        "nicollasricas.vscode-witcherscript-addon"
+    ],
     "homepage": "https://github.com/nicollasricas/vscode-witcherscript/",
     "icon": "images/icon.png",
+    "keywords": [
+        "witcher"
+    ],
     "main": "./out/extension",
     "name": "vscode-witcherscript",
     "publisher": "nicollasricas",
@@ -122,12 +188,20 @@
         "type": "git",
         "url": "https://github.com/nicollasricas/vscode-witcherscript.git"
     },
+    "runtimeDependencies": [
+        {
+            "description": "Witcher Script Companion App (1.0.2.0)",
+            "installPath": ".wsc",
+            "installTestPath": "./wsc/wsc.exe",
+            "url": "https://github.com/nicollasricas/vscode-witcherscript-companion/releases/download/1.0.2.0/1.0.2.zip"
+        }
+    ],
     "scripts": {
-        "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+        "test": "npm run compile && node ./node_modules/vscode/bin/test",
+        "vscode:prepublish": "npm run compile",
+        "watch": "tsc -watch -p ./"
     },
-    "version": "1.0.5"
+    "version": "1.0.7"
 }
