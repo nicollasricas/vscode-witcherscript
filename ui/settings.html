@@ -43,27 +43,28 @@
                 <form>
                     <div class="input-control">
                         <label>Game Path</label>
-                        <input id="gamePath" type="text" placeholder="Eg.: D:\Steam\steamapps\common\The Witcher 3" value="{{model.gamePath}}" />
-                        <a href="#" data-change-setting="gamePath">Browse</a>
+                        <input id="gamePath" type="text" placeholder="Ex.: D:\Steam\steamapps\common\The Witcher 3" value="{{model.gamePath}}" />
+                        <a href="#" data-select-folder="gamePath">Browse</a>
                     </div>
 
                     <div class="input-control">
                         <label>Mod Kit Path</label>
-                        <input id="modKitPath" type="text" placeholder="Eg.: D:\Witchering\ModKit" value="{{model.modKitPath}}" />
-                        <a href="#" data-change-setting="modKitPath">Browse</a>
+                        <input id="modKitPath" type="text" placeholder="Ex.: D:\Witchering\ModKit" value="{{model.modKitPath}}" />
+                        <a href="#" data-select-folder="modKitPath">Browse</a>
                     </div>
 
                     <div class="input-control">
-                        <label>Mod Merger Path</label>
-                        <input id="modMergerPath" type="text" placeholder="Eg.: D:\Witchering\ScriptMerger" value="{{model.modMergerPath}}" />
-                        <a href="#" data-change-setting="modMergerPath">Browse</a>
+                        <label>Script Merger Path</label>
+                        <input id="scriptMergerPath" type="text" placeholder="Ex.: D:\Witchering\ScriptMerger" value="{{model.scriptMergerPath}}"
+                        />
+                        <a href="#" data-select-folder="scriptMergerPath">Browse</a>
                     </div>
 
                     <div class="input-control">
                         <label>Uncooked Base Path</label>
-                        <input id="uncookedBasePath" type="text" placeholder="Eg.: D:\Witchering\UncookedBase" value="{{model.uncookedBasePath}}"
+                        <input id="uncookedBasePath" type="text" placeholder="Ex.: D:\Witchering\UncookedBase" value="{{model.uncookedBasePath}}"
                         />
-                        <a href="#" data-change-setting="uncookedBasePath">Browse</a>
+                        <a href="#" data-select-folder="uncookedBasePath">Browse</a>
                     </div>
                 </form>
             </main>
@@ -79,15 +80,15 @@
             window.addEventListener('message', event => {
                 const message = event.data;
 
-                if (message.command == 'update-setting-ui') {
+                if (message.command == 'update-folder-input') {
                     $('#' + message.arguments[0]).val(message.arguments[1]);
                 }
             });
 
-            $('[data-change-setting]').click(function (e) {
+            $('[data-select-folder]').click(function (e) {
                 vscode.postMessage({
-                    command: 'change-setting',
-                    arguments: [$(this).data('change-setting')]
+                    command: 'select-folder',
+                    arguments: [$(this).data('select-folder')]
                 });
             });
         });

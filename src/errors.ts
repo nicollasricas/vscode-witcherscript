@@ -1,11 +1,12 @@
 import * as vscode from 'vscode';
 
 export enum Errors {
-    ModKitPathNotSetted = "E_MOD_KIT_PATH_NOT_SETTED",
+    ModKitPathNotSetted = "The mod kit path is required.",
     GameExeNotFound = "E_GAME_EXE_NOT_FOUND",
-    GamePathNotSetted = "E_GAME_PATH_NOT_SETTED",
+    GamePathIsRequired = "The game path is required.",
+    ModKitPathIsRequired = "The mod kit path is required",
     UnableToLaunch = "E_UNABLE_TO_LAUNCH",
-    ModNotCreated = "E_MOD_NOT_CREATED",
+    ModIsRequired = "E_MOD_NOT_CREATED",
     PathNotSelected = "E_PATH_NOT_SELECTED",
     Unexpected = "E_UNEXPECTED",
     UncookedPathNotSetted = "E_UNCOOKED_PATH_NOT_SETTED"
@@ -13,27 +14,33 @@ export enum Errors {
 
 export function displayError(error: Errors) {
     if (error) {
-        vscode.window.showErrorMessage(errorToReadableString(error));
+        vscode.window.showErrorMessage(errorToString(error));
     }
 }
 
-function errorToReadableString(errorCode: string): string {
-    switch (errorCode) {
+export function displayWarning(error: Errors) {
+    if (error) {
+        vscode.window.showWarningMessage(errorToString(error));
+    }
+}
+
+export function errorToString(error: Errors): string {
+    switch (error) {
         case Errors.PathNotSelected:
             return 'Path not selected';
         case Errors.UnableToLaunch:
             return 'Unable to start the game!';
         case Errors.GameExeNotFound:
             return 'The game executable was not found!';
-        case Errors.GamePathNotSetted:
-            return 'Configure game path.';
+        case Errors.GamePathIsRequired:
+            return 'Configure the "game path" to use this feature.';
         case Errors.ModKitPathNotSetted:
-            return 'Configure mod kit path.';
-        case Errors.ModNotCreated:
-            return 'To use this feature create a mod using the (Ctrl + Shift + P) - "Witcher - New Mod" command.';
+            return 'Configure the "mod kit path" to use this feature.';
+        case Errors.ModIsRequired:
+            return 'A mod is required to use this feature, create a mod using the "create mod" command.';
         case Errors.Unexpected:
             return 'Something went wrong!';
         case Errors.UncookedPathNotSetted:
-            return 'Configure uncooked base path.';
+            return 'Configure the "uncooked base path" to use this feature.';
     }
 }

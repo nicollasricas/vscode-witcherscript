@@ -1,8 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
-import { showSettingsPage } from './commands';
-import { ExtensionId } from './constants';
+import { ExtensionId } from '../constants';
 
 interface ContentPage {
     title: string;
@@ -43,18 +42,7 @@ export class ContentPreview {
         let page = this.pages[id];
 
         if (!this.webViewPanel) {
-            this.webViewPanel = vscode.window.createWebviewPanel(`witcherscript.view.${id}`, page.title, vscode.ViewColumn.One, {
-                enableScripts: true,
-                enableCommandUris: true,
-                localResourceRoots: [
-                    vscode.Uri.parse(this.extensionPath)
-                ]
-            });
-
-            this.webViewPanel.onDidDispose(() => {
-                this.webViewPanel.dispose();
-                this.webViewPanel = null;
-            });
+            this.createWebViewPanel(id, page);
         }
 
         this.webViewPanel.title = page.title;
@@ -65,6 +53,21 @@ export class ContentPreview {
         }
 
         this.webViewPanel.reveal();
+    }
+
+    private createWebViewPanel(id: string, page: ContentPage) {
+        this.webViewPanel = vscode.window.createWebviewPanel(`witcherscript.view.${id}`, page.title, vscode.ViewColumn.One, {
+            enableScripts: true,
+            enableCommandUris: true,
+            localResourceRoots: [
+                vscode.Uri.parse(this.extensionPath)
+            ]
+        });
+
+        this.webViewPanel.onDidDispose(() => {
+            this.webViewPanel.dispose();
+            this.webViewPanel = null;
+        });
     }
 
     private parseContentDocument(pagePath: string, model: object): string {

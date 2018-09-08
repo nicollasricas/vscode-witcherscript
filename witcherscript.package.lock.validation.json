@@ -1,0 +1,48 @@
+{
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/root.json",
+    "type": "object",
+    "title": "The Root Schema",
+    "required": [
+        "scripts"
+    ],
+    "properties": {
+        "scripts": {
+            "$id": "#/properties/scripts",
+            "type": "array",
+            "title": "The Scripts Schema",
+            "items": {
+                "$id": "#/properties/scripts/items",
+                "type": "object",
+                "title": "The Items Schema",
+                "required": [
+                    "path",
+                    "crc"
+                ],
+                "properties": {
+                    "path": {
+                        "$id": "#/properties/scripts/items/properties/path",
+                        "type": "string",
+                        "title": "The Path Schema",
+                        "default": "",
+                        "examples": [
+                            ""
+                        ],
+                        "pattern": "^(.*)$"
+                    },
+                    "crc": {
+                        "$id": "#/properties/scripts/items/properties/crc",
+                        "type": "string",
+                        "title": "The Crc Schema",
+                        "default": "",
+                        "examples": [
+                            ""
+                        ],
+                        "pattern": "^(.*)$"
+                    }
+                }
+            }
+        }
+    }
+}

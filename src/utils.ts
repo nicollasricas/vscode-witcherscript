@@ -1,24 +1,27 @@
 import * as vscode from 'vscode';
-import * as child_process from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
-import { ExtensionId } from './constants';
-import { displayError, Errors } from './errors';
+import { Commands, ExtensionId } from './constants';
+import { Errors, errorToString } from './errors';
 
 export function getModName(): string {
     return vscode.workspace.name;
 }
 
-export function isWitcherPackage(): boolean {
-    if (fs.existsSync(path.join(vscode.workspace.workspaceFolders[0].uri.fsPath, 'witcher.package.json'))) {
-        return true;
+export function isMod(): boolean {
+    if (!vscode.workspace.workspaceFolders) {
+        return false;
     }
 
-    displayError(Errors.ModNotCreated);
+    if (!fs.existsSync(path.join(vscode.workspace.workspaceFolders[0].uri.fsPath, 'witcher.package.json'))) {
+        vscode.window.showInformationMessage(errorToString(Errors.ModIsRequired), 'New Mod').then((selection => {
+            if (selection) {
+                vscode.commands.executeCommand(Commands.NewMod);
+            }
+        }));
 
-    return false;
-}
+        return false;
+    }
 
-export function wscPath(): string {
-    return path.join(vscode.extensions.getExtension(ExtensionId).extensionPath, '.wsc', 'wsc.exe');
+    return true;
 }

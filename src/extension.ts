@@ -1,40 +1,79 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import * as commands from './commands';
-import * as utils from './utils';
-import * as child_process from 'child_process';
-import { RuntimeDependencyInstaller } from './RuntimeDependencyInstaller';
-import { GlobalState, ExtensionId, Commands, ExtensionScheme } from './constants';
-import { read } from 'fs';
-import { Configuration, configuration } from './configuration';
+import { GlobalState, ExtensionId, Commands } from './constants';
+import { Configuration } from './components/Configuration';
+import { WitcherScriptWrapper } from './components/WitcherScriptWrapper';
+import { LaunchGameCommand } from './commands/LaunchGameCommand';
+import { NewModCommand } from './commands/NewModCommand';
+import { CookModCommand } from './commands/CookModCommand';
+import { importScript } from './commands/importScript';
+import { importContent } from './commands/importContent';
+import { showWelcomePage } from './commands/showWelcomePage';
+import { showSettingsPage } from './commands/showSettingsPage';
+import { compareScript } from './commands/compareScript';
+import { UncookCommand } from './commands/UncookCommand';
+
+/*
+cooking mod => progress notification
+deploy mod => progress notification
+
+Cooking Mod :
+Add progress notification through role cooking proccess
+Cooking process now only cook if theres a change between content folder
+Change only scripts will always deploy
+
+Launch Game Command:
+Add an option to run with debug parameters -net -debugscripts
+Check if theres an game .exe already running.
+*/
 
 export async function activate(context: vscode.ExtensionContext) {
-    context.subscriptions.push(vscode.commands.registerCommand(Commands.Cook, () => commands.cookMod()));
-    context.subscriptions.push(vscode.commands.registerCommand(Commands.Launch, () => commands.launchGame()));
-    context.subscriptions.push(vscode.commands.registerCommand(Commands.ImportScript, (args) => commands.importScript(args)));
-    context.subscriptions.push(vscode.commands.registerCommand(Commands.ImportContent, (args) => commands.importContent(args)));
-    context.subscriptions.push(vscode.commands.registerCommand(Commands.ShowWelcomePage, () => commands.showWelcomePage()));
-    context.subscriptions.push(vscode.commands.registerCommand(Commands.ShowSettingsPage, () => commands.showSettingsPage()));
+    const outputChannel = vscode.window.createOutputChannel('Witcher Script');
 
-    let currentVersion = vscode.extensions.getExtension(ExtensionId).packageJSON.version;
-    let previousVersion = context.globalState.get<string>(GlobalState.WitcherScriptVersion);
+    context.subscriptions.push(outputChannel);
 
-    if (shouldShowWelcomePage(currentVersion, previousVersion)) {
+    const configuration = new Configuration();
+
+    const witcherScriptWrapper = new WitcherScriptWrapper(outputChannel);
+
+    context.subscriptions.push(vscode.commands.registerCommand(Commands.NewMod, () => {
+        new NewModCommand(witcherScriptWrapper).execute();
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand(Commands.LaunchGame, (debug) => {
+        new LaunchGameCommand(configuration, witcherScriptWrapper, debug).execute();
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand(Commands.CookMod, () => {
+        new CookModCommand(configuration, witcherScriptWrapper).execute();
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand(Commands.Uncook, () => {
+        new UncookCommand(configuration, witcherScriptWrapper).execute();
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand(Commands.ImportScript, (args) => importScript(configuration, args)));
+    context.subscriptions.push(vscode.commands.registerCommand(Commands.ImportContent, (args) => importContent(configuration, args)));
+    context.subscriptions.push(vscode.commands.registerCommand(Commands.ShowWelcomePage, () => showWelcomePage()));
+    context.subscriptions.push(vscode.commands.registerCommand(Commands.ShowSettingsPage, () => showSettingsPage(configuration)));
+    context.subscriptions.push(vscode.commands.registerCommand(Commands.CompareScript, (args) => compareScript(configuration, args)));
+
+    let extensionVersion = vscode.extensions.getExtension(ExtensionId).packageJSON.version;
+    let extensionPreviousVersion = context.globalState.get<string>(GlobalState.WitcherScriptVersion);
+
+    if (shouldShowWelcomePage(extensionVersion, extensionPreviousVersion)) {
         vscode.commands.executeCommand(Commands.ShowWelcomePage);
-
-        // if (!await ensureRuntimeDependencies(extension.packageJSON, context.extensionPath)) {
-        //     vscode.window.showErrorMessage('It was not possible to install Witcher Script Companion, a dependency to most of the features offered by the Witcher Script extension, you can try to install manually.', 'Download manually').then(sel => {
-        //         if (sel == 'Download manually') {
-        //             vscode.commands.executeCommand('vscode.open', vscode.Uri.parse('https://github.com/nicollasricas/vscode-witcherscript-companion/releases'));
-        //         }
-        //     });
-        // }
     }
 
-    context.globalState.update(GlobalState.WitcherScriptVersion, currentVersion);
+    context.globalState.update(GlobalState.WitcherScriptVersion, extensionVersion);
 
-    Configuration.configure();
+    //implementing LSP...
+    //context.subscriptions.push(vscode.languages.registerSignatureHelpProvider('witcherscript', new WitcherScriptSignatureHelpProvider(), '(', ','));
+    //context.subscriptions.push(vscode.languages.registerCompletionItemProvider('witcherscript', new WitcherScriptCompletionItemProvider()));
+}
+
+export function deactivate() {
 }
 
 function shouldShowWelcomePage(currentVersion: string, previousVersion: string): boolean {
@@ -47,19 +86,4 @@ function shouldShowWelcomePage(currentVersion: string, previousVersion: string):
     }
 
     return false;
-}
-
-// function ensureRuntimeDependencies(packageJSON: any, extensionPath: string): Promise<boolean> {
-//     return new Promise<boolean>((resolve, reject) => {
-//         try {
-//             new RuntimeDependencyInstaller(packageJSON, extensionPath).install();
-
-//             resolve(true);
-//         } catch (error) {
-//             reject(error);
-//         }
-//     });
-// }
-
-export function deactivate() {
 }
