@@ -5,13 +5,13 @@ import { Configuration } from '../components/Configuration';
 import { WitcherScriptWrapper } from '../components/WitcherScriptWrapper';
 import { Errors } from '../errors';
 
-export class CookModCommand implements Command {
-    constructor(private configuration: Configuration, private wrapper: WitcherScriptWrapper) {
+export class CookCommand implements Command {
+    constructor(private configuration: Configuration, private companionWrapper: WitcherScriptWrapper) {
     }
 
     execute() {
         if (!utils.isMod()) {
-            vscode.window.showWarningMessage("Cook mod ins't avaiable since this is an mod");
+            vscode.window.showWarningMessage("Create a witcher package before cooking it.");
 
             return;
         }
@@ -40,9 +40,9 @@ export class CookModCommand implements Command {
 
         let workspacePath = vscode.workspace.workspaceFolders[0].uri.fsPath;
 
-        this.wrapper.cookMod(gamePath, modKitPath, workspacePath, scriptMergerPath)
+        this.companionWrapper.cook(gamePath, modKitPath, workspacePath, scriptMergerPath)
             .then(() => {
-                vscode.window.showInformationMessage('Mod cooked.', 'Launch Game').then(cmd => {
+                vscode.window.showInformationMessage('Cooked.', 'Launch Game').then(cmd => {
                     if (cmd) {
                         vscode.commands.executeCommand(Commands.LaunchGame);
                     }

@@ -2,11 +2,11 @@
     "activationEvents": [
         "onLanguage:witcherscript",
         "workspaceContains:witcher.package.json",
-        "onCommand:witcherscript.newMod",
+        "onCommand:witcherscript.newPackage",
         "onCommand:witcherscript.showSettingsPage",
         "onCommand:witcherscript.showWelcomePage",
         "onCommand:witcherscript.launchGame",
-        "onCommand:witcherscript.cookMod",
+        "onCommand:witcherscript.cook",
         "onCommand:witcherscript.importScript",
         "onCommand:witcherscript.importContent",
         "onCommand:witcherscript.compareScript",
@@ -27,8 +27,8 @@
         "commands": [
             {
                 "category": "Witcher Script",
-                "command": "witcherscript.newMod",
-                "title": "New Mod"
+                "command": "witcherscript.newPackage",
+                "title": "New Package"
             },
             {
                 "category": "Witcher Script",
@@ -42,12 +42,12 @@
             },
             {
                 "category": "Witcher Script",
-                "command": "witcherscript.cookMod",
+                "command": "witcherscript.cook",
                 "icon": {
                     "dark": "./images/cook.png",
                     "light": "./images/cook.png"
                 },
-                "title": "Cook Mod"
+                "title": "Cook"
             },
             {
                 "category": "Witcher Script",
@@ -142,7 +142,7 @@
             ],
             "editor/title": [
                 {
-                    "command": "witcherscript.cookMod",
+                    "command": "witcherscript.cook",
                     "group": "navigation",
                     "when": "resourceLangId == witcherscript"
                 },

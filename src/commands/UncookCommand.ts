@@ -5,7 +5,7 @@ import { Errors } from '../errors';
 import { Commands } from '../constants';
 
 export class UncookCommand implements Command {
-    constructor(private configuration: Configuration, private wrapper: WitcherScriptWrapper, private debug: boolean = false) {
+    constructor(private configuration: Configuration, private companionWrapper: WitcherScriptWrapper, private debug: boolean = false) {
     }
 
     execute() {
@@ -34,7 +34,7 @@ export class UncookCommand implements Command {
                             canPickMany: false
                         }).then(skipErrors => {
                             if (skipErrors) {
-                                this.wrapper.uncook(modKitPath, textureFormat, dumpSWF == 'Yes', skipErrors == 'Yes')
+                                this.companionWrapper.uncook(modKitPath, textureFormat, dumpSWF == 'Yes', skipErrors == 'Yes')
                                     .catch(error => vscode.window.showWarningMessage(error));
                             }
                         });

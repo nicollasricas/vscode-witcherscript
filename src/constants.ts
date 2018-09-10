@@ -10,13 +10,18 @@ export enum GlobalState {
 }
 
 export enum Commands {
-    CookMod = 'witcherscript.cookMod',
+    Cook = 'witcherscript.cook',
     LaunchGame = 'witcherscript.launchGame',
     ImportScript = 'witcherscript.importScript',
     ImportContent = 'witcherscript.importContent',
     ShowWelcomePage = 'witcherscript.showWelcomePage',
     ShowSettingsPage = 'witcherscript.showSettingsPage',
-    NewMod = 'witcherscript.newMod',
+    NewPackage = 'witcherscript.newPackage',
     CompareScript = 'witcherscript.compareScript',
     Uncook = 'witcherscript.uncook'
+}
+
+export enum Pages {
+    Welcome = 'welcome-page',
+    Settings = 'settings-page'
 }

@@ -2,11 +2,11 @@ import * as vscode from 'vscode';
 import { Configuration } from "../components/Configuration";
 
 import { Commands } from '../constants';
-import { displayWarning, Errors } from '../errors';
+import { Errors } from '../errors';
 import { WitcherScriptWrapper } from '../components/WitcherScriptWrapper';
 
 export class LaunchGameCommand implements Command {
-    constructor(private configuration: Configuration, private wrapper: WitcherScriptWrapper, private debug: boolean = false) {
+    constructor(private configuration: Configuration, private companionWrapper: WitcherScriptWrapper, private debug: boolean = false) {
     }
 
     execute() {
@@ -20,7 +20,7 @@ export class LaunchGameCommand implements Command {
             return;
         }
 
-        this.wrapper.launchGame(gamePath, this.debug)
+        this.companionWrapper.launchGame(gamePath, this.debug)
             .catch(error => vscode.window.showWarningMessage(error));
     }
 }

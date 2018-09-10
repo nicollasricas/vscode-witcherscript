@@ -86,5 +86,3 @@ export class ContentPreview {
         return content;
     }
 }
-
-export const contentPreview = new ContentPreview();

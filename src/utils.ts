@@ -14,9 +14,9 @@ export function isMod(): boolean {
     }
 
     if (!fs.existsSync(path.join(vscode.workspace.workspaceFolders[0].uri.fsPath, 'witcher.package.json'))) {
-        vscode.window.showInformationMessage(errorToString(Errors.ModIsRequired), 'New Mod').then((selection => {
+        vscode.window.showInformationMessage(errorToString(Errors.ModIsRequired), 'New Package').then((selection => {
             if (selection) {
-                vscode.commands.executeCommand(Commands.NewMod);
+                vscode.commands.executeCommand(Commands.NewPackage);
             }
         }));
 

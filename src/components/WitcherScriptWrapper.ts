@@ -40,9 +40,9 @@ export class WitcherScriptWrapper {
         });
     }
 
-    cookMod(gamePath: string, modKitPath: string, workspacePath: string, modMergerPath: string): Promise<any> {
+    cook(gamePath: string, modKitPath: string, workspacePath: string, modMergerPath: string): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            this.exec('--cookmod', [`"${gamePath}"`, `"${modKitPath}"`, `"${workspacePath}"`, `"${modMergerPath}"`], true)
+            this.exec('--cook', [`"${gamePath}"`, `"${modKitPath}"`, `"${workspacePath}"`, `"${modMergerPath}"`], true)
                 .then(() => resolve())
                 .catch(error => reject(error));
         });
@@ -56,7 +56,7 @@ export class WitcherScriptWrapper {
                 params.push('--debug');
             }
 
-            this.exec('--launchgame', params, false)
+            this.exec('--launchgame', params, true)
                 .then(() => resolve())
                 .catch(error => reject(error));
         });
