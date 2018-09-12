@@ -19,6 +19,8 @@ This extension adds support for The Witcher 3 script language to VS Code.
 - Removed witcherscript add-on dependency.
 - Improved extension activation events.
 - General improvements.
+- Added visual feedback to background process.
+- Added an option to compare modified scripts with the original ones.
 
 ### 1.0.8
 - Improved extension activation events.
