@@ -16,20 +16,6 @@ import { UncookCommand } from './commands/UncookCommand';
 import { CommandTreeView } from './components/CommandTreeView';
 import { ContentPreview } from './components/ContentPreview';
 
-/*
-cooking mod => progress notification
-deploy mod => progress notification
-
-Cooking Mod :
-Add progress notification through role cooking proccess
-Cooking process now only cook if theres a change between content folder
-Change only scripts will always deploy
-
-Launch Game Command:
-Add an option to run with debug parameters -net -debugscripts
-Check if theres an game .exe already running.
-*/
-
 export async function activate(context: vscode.ExtensionContext) {
     const outputChannel = vscode.window.createOutputChannel('Witcher Script');
 

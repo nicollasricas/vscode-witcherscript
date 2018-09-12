@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 
+// test implementation of tree view, it may be used by debugging mods...
 export class CommandTreeView implements vscode.TreeDataProvider<CommandTreeViewItem> {
     private _onDidChangeTreeData: vscode.EventEmitter<CommandTreeViewItem> = new vscode.EventEmitter<CommandTreeViewItem>();
 
@@ -12,8 +13,7 @@ export class CommandTreeView implements vscode.TreeDataProvider<CommandTreeViewI
 
     getChildren(element?: CommandTreeViewItem): vscode.ProviderResult<CommandTreeViewItem[]> {
         return new Promise(resolve => {
-            let cms: CommandTreeViewItem[];
-            cms = [];
+            let cms: CommandTreeViewItem[] = [];
 
             cms.push(new CommandTreeViewItem('Cook'));
             cms.push(new CommandTreeViewItem('Uncook'));

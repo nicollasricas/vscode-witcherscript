@@ -9,7 +9,7 @@ All notable changes to the Witcher Script extension will be documented in this f
 - General improvements.
 - Added uncook command.
 - Added an option to compare modified scripts with the original ones.
-- Removed companion dependency.
+- Removed companion add-on dependency.
 - Added visual feedback to background process.
 
 ### Removed

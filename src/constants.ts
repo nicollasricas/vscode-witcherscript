@@ -2,7 +2,6 @@ export const InternalExtensionId = 'vscode-witcherscript';
 export const ExtensionId = `nicollasricas.${InternalExtensionId}`;
 export const ExtensionScheme = 'witcherscript';
 export const ExtensionName = 'Witcher Script';
-
 export const OutputChannelName = 'Witcher Script';
 
 export enum GlobalState {

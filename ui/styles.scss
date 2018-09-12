@@ -172,6 +172,13 @@ h1 {
                                     padding: 0 10px;
                                     vertical-align: middle;
                                     color: $primaryColor;
+
+                                    .badge {
+                                        padding: 2px 4px;
+                                        background: red;
+                                        text-transform: uppercase;
+                                        color: #fff;
+                                    }
                                 }
                             }
                         }

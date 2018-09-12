@@ -132,6 +132,11 @@ h1 {
               padding: 0 10px;
               vertical-align: middle;
               color: #fff; }
+              .container .content main .features ul li a .tag .title .badge {
+                padding: 2px 4px;
+                background: red;
+                text-transform: uppercase;
+                color: #fff; }
         .container .content main .features ul li .addon {
           position: relative;
           width: 80%;

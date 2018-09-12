@@ -1,5 +1,4 @@
 import * as vscode from 'vscode';
-import { Commands } from '../constants';
 
 export class Configuration {
     private gamePath: string;
