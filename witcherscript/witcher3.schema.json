@@ -1,0 +1,132 @@
+{
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/root.json",
+    "type": "object",
+    "title": "The Witcher 3 Package Schema",
+    "required": [
+        "package.name"
+    ],
+    "properties": {
+        "package.name": {
+            "$id": "#/properties/package.name",
+            "type": "string",
+            "title": "The package name.",
+            "default": "",
+            "examples": [
+                "modCharacterFacesUpgraded"
+            ]
+        },
+        "package.isDLC": {
+            "$id": "#/properties/package.isDLC",
+            "type": "boolean",
+            "title": "Specifies if the package is a DLC.",
+            "default": false,
+            "examples": [
+                false
+            ]
+        },
+        "cook.parallelism": {
+            "$id": "#/properties/cook.parallelism",
+            "type": "boolean",
+            "title": "Enables parallelism when cooking packages, speeding up the cooking process.",
+            "default": true,
+            "examples": [
+                false
+            ]
+        },
+        "cook.localDepot": {
+            "$id": "#/properties/cook.localDepot",
+            "type": "boolean",
+            "title": "Specifies if should use local depot for cooking.",
+            "default": false,
+            "examples": [
+                false
+            ]
+        },
+        "cook.exclude": {
+            "$id": "#/properties/optional/items/properties/cook.exclude",
+            "type": "array",
+            "title": "Files to exclude from cooking",
+            "items": {
+                "$id": "#/properties/optional/items/properties/cook.exclude/items",
+                "type": "string",
+                "title": "Excluded items schema",
+                "default": "",
+                "examples": [
+                    "*/characters/models/main_npc/triss/*",
+                    "*/characters/models/main_npc/yennefer/*",
+                    "*/characters/models/secondary_npc/shani/*"
+                ]
+            }
+        },
+        "optional": {
+            "$id": "#/properties/optional",
+            "type": "array",
+            "title": "Optional Builds",
+            "items": {
+                "$id": "#/properties/optional/items",
+                "type": "object",
+                "title": "Optional build schema",
+                "required": [
+                    "package.name",
+                    "cook.exclude"
+                ],
+                "properties": {
+                    "package.name": {
+                        "$id": "#/properties/optional/items/properties/package.name",
+                        "type": "string",
+                        "title": "The package name.",
+                        "default": "",
+                        "examples": [
+                            "modCharacterFacesUpgradedWithoutTrissYenShani"
+                        ]
+                    },
+                    "package.isDLC": {
+                        "$id": "#/properties/optional/items/properties/package.isDLC",
+                        "type": "boolean",
+                        "title": "Specifies if the package is a DLC.",
+                        "default": false,
+                        "examples": [
+                            false
+                        ]
+                    },
+                    "cook.parallelism": {
+                        "$id": "#/properties/optional/items/properties/cook.parallelism",
+                        "type": "boolean",
+                        "title": "Enables parallelism when cooking packages, speeding up the cooking process.",
+                        "default": true,
+                        "examples": [
+                            false
+                        ]
+                    },
+                    "cook.localDepot": {
+                        "$id": "#/properties/optional/items/properties/cook.localDepot",
+                        "type": "boolean",
+                        "title": "Specifies if should use local depot for cooking.",
+                        "default": false,
+                        "examples": [
+                            false
+                        ]
+                    },
+                    "cook.exclude": {
+                        "$id": "#/properties/optional/items/properties/cook.exclude",
+                        "type": "array",
+                        "title": "Files to exclude from cooking",
+                        "items": {
+                            "$id": "#/properties/optional/items/properties/cook.exclude/items",
+                            "type": "string",
+                            "title": "Excluded items schema",
+                            "default": "",
+                            "examples": [
+                                "*/characters/models/main_npc/triss/*",
+                                "*/characters/models/main_npc/yennefer/*",
+                                "*/characters/models/secondary_npc/shani/*"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

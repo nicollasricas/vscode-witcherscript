@@ -1,7 +1,7 @@
-import * as vscode from 'vscode';
-import * as fs from 'fs';
-import * as path from 'path';
-import { ExtensionId } from '../constants';
+import * as vscode from "vscode";
+import * as fs from "fs";
+import * as path from "path";
+import { ExtensionId } from "../constants";
 
 interface ContentPage {
     title: string;
@@ -15,13 +15,13 @@ interface ContentMessage {
 
 export class ContentPreview {
     private pages: { [id: string]: ContentPage } = {
-        'welcome-page': {
-            title: 'Witcher Script',
-            path: './ui/welcome.html'
+        "welcome-page": {
+            title: "Witcher Script",
+            path: "./ui/welcome.html"
         },
-        'settings-page': {
-            title: 'Witcher Script - Settings',
-            path: './ui/settings.html'
+        "settings-page": {
+            title: "Witcher Script - Settings",
+            path: "./ui/settings.html"
         }
     };
 
@@ -56,13 +56,16 @@ export class ContentPreview {
     }
 
     private createWebViewPanel(id: string, page: ContentPage) {
-        this.webViewPanel = vscode.window.createWebviewPanel(`witcherscript.view.${id}`, page.title, vscode.ViewColumn.One, {
-            enableScripts: true,
-            enableCommandUris: true,
-            localResourceRoots: [
-                vscode.Uri.parse(this.extensionPath)
-            ]
-        });
+        this.webViewPanel = vscode.window.createWebviewPanel(
+            `witcherscript.view.${id}`,
+            page.title,
+            vscode.ViewColumn.One,
+            {
+                enableScripts: true,
+                enableCommandUris: true,
+                localResourceRoots: [vscode.Uri.parse(this.extensionPath)]
+            }
+        );
 
         this.webViewPanel.onDidDispose(() => {
             this.webViewPanel.dispose();
@@ -71,7 +74,9 @@ export class ContentPreview {
     }
 
     private parseContentDocument(pagePath: string, model: object): string {
-        const rootPath = vscode.Uri.parse(this.extensionPath).with({ scheme: 'vscode-resource' }).toString();
+        const rootPath = vscode.Uri.parse(this.extensionPath)
+            .with({ scheme: "vscode-resource" })
+            .toString();
 
         let content = fs.readFileSync(path.join(this.extensionPath, pagePath)).toString();
 
@@ -79,7 +84,7 @@ export class ContentPreview {
 
         if (model) {
             for (let property in model) {
-                content = content.replace(new RegExp(`{{model.${property}}}`, 'gi'), model[property]);
+                content = content.replace(new RegExp(`{{model.${property}}}`, "gi"), model[property]);
             }
         }
 

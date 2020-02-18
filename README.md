@@ -5,34 +5,26 @@ This extension adds support for The Witcher 3 script language to VS Code.
 [Wiki](https://github.com/nicollasricas/vscode-witcherscript/wiki).
 
 ## Features
-- Code Highlight.
-- Create, cook/uncook and publish mods.
-- Import scripts and contents.
-- Snippets.
-- Compare modified scripts with original ones.
-- IntelliSense (WIP).
-- Navigation menus, symbols and references (WIP).
 
-## Release Notes [Full Changelog](CHANGELOG.md)
+-   Code Highlight.
+-   Create, cook/uncook and publish packages.
+-   Import scripts and contents.
+-   Snippets.
+-   Compare modified scripts with original ones.
 
-### 1.0.9
-- Removed witcherscript add-on dependency.
-- Improved extension activation events.
-- General improvements.
-- Added visual feedback to background process.
-- Added an option to compare modified scripts with the original ones.
+## Latest Release Notes
 
-### 1.0.8
-- Improved extension activation events.
-- Improved cooking command.
+### 2.0.9
 
-### 1.0.7
-- Added import scripts command.
-- Added import contents command.
-- Added welcome page.
-- Added settings page.
-- Bug fixes.
+-   Added support for cooking packages with optional versions.
+-   Added debug support.
+-   Added ModKit outputs into VS Code.
+-   Improved cooking (now it takes a few minutes with a lot of files before was taking 20-30 minutes) and uncooking.
+-   Added support for optional packages when cooking
+-   Bug fixes.
+-   Fixed bugs.
+-   Improved snippets.
 
 ## License
 
-Witcher Script is licensed under [MIT](https://opensource.org/licenses/MIT).
+[MIT](https://opensource.org/licenses/MIT).

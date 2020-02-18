@@ -1,4 +1,5 @@
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
+import { Configurations } from "../constants";
 
 export class Configuration {
     private gamePath: string;
@@ -9,28 +10,44 @@ export class Configuration {
     constructor() {
         this.configure();
 
-        vscode.workspace.onDidChangeConfiguration((e) => this.configure());
+        vscode.workspace.onDidChangeConfiguration(() => this.configure());
     }
 
     update(name: string, value: any): any {
         let workspaceConfiguration = vscode.workspace.getConfiguration();
 
         switch (name) {
-            case 'gamePath':
+            case Configurations.GamePath:
                 this.gamePath = value;
-                workspaceConfiguration.update('witcherscript.gamePath', this.gamePath, vscode.ConfigurationTarget.Global);
+                workspaceConfiguration.update(
+                    Configurations.GamePath,
+                    this.gamePath,
+                    vscode.ConfigurationTarget.Global
+                );
                 break;
-            case 'modKitPath':
+            case Configurations.ModKitPath:
                 this.modKitPath = value;
-                workspaceConfiguration.update('witcherscript.modKitPath', this.modKitPath, vscode.ConfigurationTarget.Global);
+                workspaceConfiguration.update(
+                    Configurations.ModKitPath,
+                    this.modKitPath,
+                    vscode.ConfigurationTarget.Global
+                );
                 break;
-            case 'scriptMergerPath':
+            case Configurations.ScriptMergerPath:
                 this.scriptMergerPath = value;
-                workspaceConfiguration.update('witcherscript.scriptMergerPath', this.scriptMergerPath, vscode.ConfigurationTarget.Global);
+                workspaceConfiguration.update(
+                    Configurations.ScriptMergerPath,
+                    this.scriptMergerPath,
+                    vscode.ConfigurationTarget.Global
+                );
                 break;
-            case 'uncookedBasePath':
+            case Configurations.UncookedBasePath:
                 this.uncookedBasePath = value;
-                workspaceConfiguration.update('witcherscript.uncookedBasePath', this.uncookedBasePath, vscode.ConfigurationTarget.Global);
+                workspaceConfiguration.update(
+                    Configurations.UncookedBasePath,
+                    this.uncookedBasePath,
+                    vscode.ConfigurationTarget.Global
+                );
                 break;
         }
     }
@@ -38,10 +55,10 @@ export class Configuration {
     private configure() {
         let workspaceConfiguration = vscode.workspace.getConfiguration();
 
-        this.gamePath = workspaceConfiguration.get('witcherscript.gamePath');
-        this.modKitPath = workspaceConfiguration.get('witcherscript.modKitPath');
-        this.scriptMergerPath = workspaceConfiguration.get('witcherscript.scriptMergerPath');
-        this.uncookedBasePath = workspaceConfiguration.get('witcherscript.uncookedBasePath');
+        this.gamePath = workspaceConfiguration.get(Configurations.GamePath);
+        this.modKitPath = workspaceConfiguration.get(Configurations.ModKitPath);
+        this.scriptMergerPath = workspaceConfiguration.get(Configurations.ScriptMergerPath);
+        this.uncookedBasePath = workspaceConfiguration.get(Configurations.UncookedBasePath);
     }
 
     get GamePath(): string {

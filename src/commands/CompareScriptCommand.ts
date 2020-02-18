@@ -1,36 +1,48 @@
-import * as path from 'path';
-import * as vscode from 'vscode';
-import { Configuration } from '../components/Configuration';
-import * as utils from '../utils';
+import * as path from "path";
+import * as vscode from "vscode";
+import * as fse from "fs-extra";
+import { Configuration } from "../components/Configuration";
+import { Commands, Strings } from "../constants";
 
 export class CompareScriptCommand implements Command {
-    constructor(private configuration: Configuration, private uri: vscode.Uri) {
-
-    }
+    constructor(private configuration: Configuration, private uri: vscode.Uri) {}
 
     execute() {
-        if (!this.uri || !this.uri.fsPath) {
+        if (!vscode.workspace.workspaceFolders) {
             return;
         }
 
-        if (!vscode.workspace.workspaceFolders[0]) {
-            return;
-        }
+        let workspacePath = vscode.workspace.workspaceFolders[0].uri.fsPath;
 
-        if (!utils.isMod()) {
+        if (!fse.pathExistsSync(path.join(workspacePath, "content", "scripts"))) {
             return;
         }
 
         let gamePath = this.configuration.GamePath;
 
         if (!gamePath) {
+            vscode.window.showInformationMessage(Strings.GamePathIsRequired);
+
+            vscode.commands.executeCommand(Commands.ShowSettingsPage);
+
             return;
         }
 
-        let workspacePath = vscode.workspace.workspaceFolders[0].uri.fsPath;
+        let originalScriptPath = this.uri.fsPath.replace(
+            path.join(workspacePath, "content"),
+            path.join(gamePath, "content/content0")
+        );
 
-        let right = this.uri.fsPath.replace(path.join(workspacePath, utils.getModName()), path.join(gamePath, 'content/content0'));
+        if (!fse.pathExistsSync(originalScriptPath)) {
+            return;
+        }
 
-        vscode.commands.executeCommand('vscode.diff', vscode.Uri.file(this.uri.fsPath), vscode.Uri.file(right), `Diff ${path.basename(this.uri.fsPath)} (Head/Original)`, {});
+        vscode.commands.executeCommand(
+            "vscode.diff",
+            vscode.Uri.file(this.uri.fsPath),
+            vscode.Uri.file(originalScriptPath),
+            `Diff ${path.basename(this.uri.fsPath)} (Head/Original)`,
+            {}
+        );
     }
 }

@@ -1,3 +1,3 @@
 abstract class Command {
-    abstract execute();
+    abstract execute(): void;
 }
