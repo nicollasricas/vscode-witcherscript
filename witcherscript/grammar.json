@@ -104,7 +104,7 @@
 			]
 		},
 		{
-			"begin": "(var)\\s*",
+			"begin": "\\b(var)\\b\\s*",
 			"beginCaptures": {
 				"1": {
 					"name": "storage.type.ws"
