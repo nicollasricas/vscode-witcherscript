@@ -1,224 +1,55 @@
 {
-    "activationEvents": [
-        "onLanguage:witcherscript",
-        "workspaceContains:witcher.package.json",
-        "onCommand:witcherscript.newPackage",
-        "onCommand:witcherscript.showSettingsPage",
-        "onCommand:witcherscript.showWelcomePage",
-        "onCommand:witcherscript.launchGame",
-        "onCommand:witcherscript.cook",
-        "onCommand:witcherscript.importScript",
-        "onCommand:witcherscript.importContent",
-        "onCommand:witcherscript.compareScript",
-        "onCommand:witcherscript.uncook"
-    ],
-    "author": {
-        "name": "Nicollas Ricas"
-    },
-    "bugs": {
-        "url": "https://github.com/nicollasricas/vscode-witcherscript/issues"
-    },
-    "categories": [
-        "Programming Languages",
-        "Other",
-        "Snippets"
-    ],
-    "contributes": {
-        "breakpoints": [
-            {
-                "language": "witcherscript"
-            }
-        ],
-        "debuggers": [
-            {
-                "type": "witcherscript",
-                "label": "Witcher Script",
-                "program": "./out/features/debug/DebugSession.js",
-                "initialConfigurations": [
-                    {
-                        "type": "witcherscript",
-                        "request": ""
-                    }
-                ]
-            }
-        ],
-        "commands": [
-            {
-                "category": "Witcher Script",
-                "command": "witcherscript.newPackage",
-                "title": "New Package"
-            },
-            {
-                "category": "Witcher Script",
-                "command": "witcherscript.showWelcomePage",
-                "title": "Welcome"
-            },
-            {
-                "category": "Witcher Script",
-                "command": "witcherscript.showSettingsPage",
-                "title": "Settings"
-            },
-            {
-                "category": "Witcher Script",
-                "command": "witcherscript.cook",
-                "title": "Cook"
-            },
-            {
-                "category": "Witcher Script",
-                "command": "witcherscript.uncook",
-                "title": "Uncook"
-            },
-            {
-                "category": "Witcher Script",
-                "command": "witcherscript.launchGame",
-                "title": "Launch Game"
-            },
-            {
-                "category": "Witcher Script",
-                "command": "witcherscript.importScript",
-                "title": "Import Witcher Script File"
-            },
-            {
-                "category": "Witcher Script",
-                "command": "witcherscript.importContent",
-                "title": "Import Witcher Content File"
-            },
-            {
-                "category": "Witcher Script",
-                "command": "witcherscript.compareScript",
-                "title": "Compare with Original Witcher Script"
-            }
-        ],
-        "configuration": [
-            {
-                "properties": {
-                    "witcherscript.gamePath": {
-                        "default": "",
-                        "description": "The path containing the Witcher 3 files.",
-                        "type": "string"
-                    },
-                    "witcherscript.modKitPath": {
-                        "default": "",
-                        "description": "The path containing the Witcher 3 Mod Kit files.",
-                        "type": "string"
-                    },
-                    "witcherscript.scriptMergerPath": {
-                        "default": "",
-                        "description": "The path containing the Mod Merger files.",
-                        "type": "string"
-                    },
-                    "witcherscript.uncookedBasePath": {
-                        "default": "",
-                        "description": "The path containing uncooked base files.",
-                        "type": "string"
-                    }
-                },
-                "title": "Witcher Script configuration"
-            }
-        ],
-        "grammars": [
-            {
-                "language": "witcherscript",
-                "path": "./witcherscript/grammar.json",
-                "scopeName": "source.ws"
-            }
-        ],
-        "jsonValidation": [
-            {
-                "fileMatch": "witcher3.json",
-                "url": "./witcherscript/witcher3.schema.json"
-            }
-        ],
-        "languages": [
-            {
-                "aliases": [
-                    "Witcher Script",
-                    "witcherscript"
-                ],
-                "configuration": "./witcherscript/language.json",
-                "extensions": [
-                    ".ws"
-                ],
-                "id": "witcherscript"
-            }
-        ],
-        "menus": {
-            "editor/context": [
-                {
-                    "command": "witcherscript.compareScript",
-                    "group": "witcherscript",
-                    "when": "resourceLangId == witcherscript"
-                }
-            ],
-            "explorer/context": [
-                {
-                    "command": "witcherscript.importScript",
-                    "group": "witcherscript"
-                },
-                {
-                    "command": "witcherscript.importContent",
-                    "group": "witcherscript"
-                },
-                {
-                    "command": "witcherscript.compareScript",
-                    "group": "witcherscript",
-                    "when": "resourceExtname == .ws"
-                }
-            ]
-        },
-        "snippets": [
-            {
-                "language": "witcherscript",
-                "path": "./witcherscript/snippets.json"
-            }
-        ]
-    },
-    "dependencies": {
-        "JSONStream": "^1.3.5",
-        "fs-extra": "^8.1.0",
-        "node-notifier": "^6.0.0",
-        "ws": "^7.2.1",
-        "await-notify": "1.0.1",
-        "vscode-debugadapter": "~1.38.0",
-        "vscode-debugprotocol": "~1.38.0"
-    },
-    "description": "Witcher Script for Visual Studio Code",
-    "devDependencies": {
-        "@types/node": "^13.7.1",
-        "@types/fs-extra": "^8.1.0",
-        "@types/node-notifier": "^5.4.0",
-        "@types/ws": "^7.2.1",
-        "gulp": "^4.0.2",
-        "gulp-sass": "^4.0.2",
-        "tslint": "^5.18.0",
-        "typescript": "^3.5.3",
-        "vscode": "^1.1.36"
-    },
-    "displayName": "vscode-witcherscript",
-    "engines": {
-        "vscode": "^1.34.0"
-    },
-    "homepage": "https://github.com/nicollasricas/vscode-witcherscript/",
-    "icon": "icon.png",
-    "keywords": [
-        "witcherscript",
-        "the witcher 3",
-        "witcher",
-        "tw3"
-    ],
-    "main": "./out/extension",
-    "name": "vscode-witcherscript",
-    "publisher": "nicollasricas",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/nicollasricas/vscode-witcherscript.git"
-    },
-    "scripts": {
-        "compile": "tsc -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test",
-        "vscode:prepublish": "npm run compile",
-        "watch": "tsc -watch -p ./"
-    },
-    "version": "2.0.9"
+  "name": "vscode-witcherscript",
+  "displayName": "[Deprecated] Witcher Script - The Witcher 3",
+  "description": "Witcher Script for Visual Studio Code",
+  "version": "2.0.9",
+  "engines": {
+    "vscode": "^1.38.0"
+  },
+  "icon": "icon.png",
+  "publisher": "nicollasr",
+  "author": {
+    "name": "Nicollas R."
+  },
+  "keywords": [
+    "witcherscript",
+    "witcher 3",
+    "the witcher 3",
+    "witcher",
+    "tw3",
+    "script",
+    "mod",
+    "mods"
+  ],
+  "bugs": {
+    "url": "https://github.com/nicollasricas/vscode-witcherscript/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicollasricas/vscode-witcherscript.git"
+  },
+  "homepage": "https://github.com/nicollasricas/vscode-witcherscript/",
+  "categories": [
+    "Programming Languages",
+    "Other",
+    "Snippets"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "./node_modules/.bin/eslint src --ext ts",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.41",
+    "@types/vscode": "^1.38.0",
+    "prettier": "2.2.1",
+    "typescript": "^4.2.4"
+  }
 }
