@@ -110,7 +110,7 @@
 					"name": "storage.type.ws"
 				}
 			},
-			"end": ":\\s*(array\\s*<\\s*\\w+\\s*>|\\w*)\\s*;",
+			"end": ":\\s*(array\\s*<\\s*\\w+\\s*>|\\w*)\\s*(\\s*=.+)?;",
 			"endCaptures": {
 				"1": {
 					"patterns": [
